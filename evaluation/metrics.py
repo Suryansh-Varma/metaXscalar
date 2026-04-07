@@ -94,7 +94,7 @@ def aggregate(results: List[Dict]) -> Dict:
 
 
 # ----------------------------
-# Pretty Print (Optional but 🔥)
+# Pretty Print (Optional)
 # ----------------------------
 def print_summary(summary: Dict):
     """Nicely format a single episode summary."""

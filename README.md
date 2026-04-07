@@ -1,13 +1,13 @@
 ---
 title: OpsArena Cloud Ops Command Centre
-emoji: ⚡
+emoji: none
 colorFrom: indigo
 colorTo: slate
 sdk: docker
 pinned: false
 ---
 
-# ⚡ OpsArena — Cloud Operations Command Centre
+# OpsArena — Cloud Operations Command Centre
 
 > **A production-grade AI agent evaluation benchmark** for multi-step operational scheduling under resource constraints, SLA deadlines, and cascading infrastructure failures.
 
@@ -51,7 +51,7 @@ ops/
 │   ├── base.py            # BaseAgent ABC
 │   ├── random_agent.py    # Random-assignment baseline
 │   ├── greedy_agent.py    # Priority + EDF greedy heuristic
-│   ├── rl_agent.py        # Q-learning agent with linear function approximation ✨
+│   ├── rl_agent.py        # Q-learning agent with linear function approximation
 │   └── llm_agent.py       # LLM-prompted agent (requires ANTHROPIC_API_KEY)
 │
 ├── evaluation/

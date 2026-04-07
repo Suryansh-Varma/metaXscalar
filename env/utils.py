@@ -78,7 +78,7 @@ def format_observation(obs: dict) -> str:
         for t in obs["pending_tasks"] + obs["delayed_tasks"]:
             deps = f"  [needs: {', '.join(t['dependencies'])}]" if t["dependencies"] else ""
             lines.append(
-                f"  [{t['priority']}★ {t['status']}] {t['task_id']} — {t['name']}"
+                f"  [{t['priority']}* {t['status']}] {t['task_id']} — {t['name']}"
                 f"  dur={t['duration']} deadline={t['deadline']}{deps}"
             )
         lines.append("")
@@ -94,7 +94,7 @@ def format_observation(obs: dict) -> str:
     lines.append("Resources:")
     for r in obs["resources"]:
         filled = int(r["utilization"] * 10)
-        bar    = "█" * filled + "░" * (10 - filled)
+        bar    = "#" * filled + "-" * (10 - filled)
         avail  = "free" if r["available"] else "busy"
         lines.append(
             f"  {r['resource_id']}  {r['name']:16s}  [{bar}] "

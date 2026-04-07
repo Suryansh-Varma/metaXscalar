@@ -89,10 +89,10 @@ def _build_task_board_html(obs: dict) -> str:
     .pill {{ border-radius: 6px; padding: 4px 10px; font-size: 11.5px; font-weight: 600; }}
     </style>
     <div class="summary-pills">
-      <div class="pill" style="background:#1e3a5f;color:#60a5fa">⏳ {pending} Pending</div>
-      <div class="pill" style="background:#1a3a2f;color:#34d399">⚡ {active} Active</div>
-      <div class="pill" style="background:#1e2d1e;color:#86efac">✓ {done} Done</div>
-      <div class="pill" style="background:#3a1a1a;color:#fca5a5">✗ {fail} Failed</div>
+      <div class="pill" style="background:#1e3a5f;color:#60a5fa">Pending: {pending}</div>
+      <div class="pill" style="background:#1a3a2f;color:#34d399">Active: {active}</div>
+      <div class="pill" style="background:#1e2d1e;color:#86efac">Done: {done}</div>
+      <div class="pill" style="background:#3a1a1a;color:#fca5a5">Failed: {fail}</div>
       <div class="pill" style="background:#1e1e2e;color:#94a3b8">Step {s}/{t}</div>
     </div><br><div class="task-board">""".format(
         pending=len(cols["pending"][1]), active=len(cols["active"][1]), 
@@ -102,8 +102,8 @@ def _build_task_board_html(obs: dict) -> str:
     for col_key, (title, tasks, bg) in cols.items():
         html += f'<div class="kb-col" style="background:{bg}20;border:1px solid {bg}60"><div class="kb-header">{title}</div>'
         if col_key == "done":
-            if completed_count: html += f'<div class="task-card"><div class="task-name" style="color:#34d399">✓ {completed_count} completed</div></div>'
-            if failed_count: html += f'<div class="task-card"><div class="task-name" style="color:#f87171">✗ {failed_count} failed</div></div>'
+            if completed_count: html += f'<div class="task-card"><div class="task-name" style="color:#34d399">Completed: {completed_count}</div></div>'
+            if failed_count: html += f'<div class="task-card"><div class="task-name" style="color:#f87171">Failed: {failed_count}</div></div>'
         else:
             for t in tasks:
                 color = _priority_color(t.get("priority", 1))
@@ -151,20 +151,20 @@ def _run_full_episode(difficulty: str, agent_name: str, seed: int):
 def _train_rl_agent(episodes: int, difficulty: str):
     if os.path.exists(_RL_WEIGHTS_PATH):
         agent = RLAgent.load(_RL_WEIGHTS_PATH)
-        log = f"🔄 Loaded existing weights. Resuming training from episode {agent._episode_count}...\n"
+        log = f"Loaded existing weights. Resuming training from episode {agent._episode_count}...\n"
     else:
         agent = RLAgent()
-        log = f"🚀 Starting fresh training for {episodes} episodes on '{difficulty}'...\n"
+        log = f"Starting fresh training for {episodes} episodes on '{difficulty}'...\n"
     
     scores = agent.train(n_episodes=int(episodes), difficulty=difficulty)
     agent.save(_RL_WEIGHTS_PATH)
-    log += f"✅ Training complete. Final Average Score: {sum(scores[-10:])/10:.4f}\n"
+    log += f"Training complete. Final Average Score: {sum(scores[-10:])/10:.4f}\n"
     log += f"Weights saved to {_RL_WEIGHTS_PATH}"
     return log
 
 def _run_batch_eval(agent_name: str):
     agent = _get_agent(agent_name)
-    log = f"📊 Evaluating {agent_name} across all difficulties...\n"
+    log = f"Evaluating {agent_name} across all difficulties...\n"
     results = evaluate_all(agent)
     log += f"Overall Avg Score: {results['overall_avg']}"
     return results, log
@@ -175,32 +175,32 @@ _CSS = "body { background: #020817; color: #e2e8f0; }"
 theme = gr.themes.Soft(primary_hue="indigo", neutral_hue="slate")
 
 with gr.Blocks(title="OpsArena — Cloud Ops") as demo:
-    gr.HTML("<h1 style='color:#818cf8'>⚡ OpsArena — Cloud Ops Command Centre</h1>")
+    gr.HTML("<h1 style='color:#818cf8'>OpsArena — Cloud Ops Command Centre</h1>")
     with gr.Tabs():
-        with gr.Tab("🎯 Single Episode"):
+        with gr.Tab("Single Episode"):
             with gr.Row():
                 diff = gr.Dropdown(["easy", "medium", "hard"], value="medium", label="Difficulty")
                 agt = gr.Dropdown(["Greedy", "Random", "RL (Q-Learning)"], value="Greedy", label="Agent")
                 sd = gr.Number(value=42, label="Seed", precision=0)
-                btn = gr.Button("▶ Run Episode", variant="primary")
+                btn = gr.Button("Run Episode", variant="primary")
             b_board = gr.HTML()
             b_res = gr.HTML()
             b_out = gr.Textbox(label="Logs", lines=2)
             btn.click(_run_full_episode, [diff, agt, sd], [b_board, b_res, b_out])
 
-        with gr.Tab("🧠 Train RL Agent"):
+        with gr.Tab("Train RL Agent"):
             gr.Markdown("Train the Q-Learning agent offline to optimize resource scheduling.")
             with gr.Row():
                 rl_eps = gr.Slider(50, 1000, value=200, step=50, label="Episodes")
                 rl_diff = gr.Dropdown(["easy", "medium", "hard"], value="medium", label="Difficulty")
-                tr_btn = gr.Button("🚀 Start Training", variant="primary")
+                tr_btn = gr.Button("Start Training", variant="primary")
             tr_log = gr.Textbox(label="Training Output", lines=10)
             tr_btn.click(_train_rl_agent, [rl_eps, rl_diff], [tr_log])
 
-        with gr.Tab("📊 Benchmarking"):
+        with gr.Tab("Benchmarking"):
             gr.Markdown("Compare agents across a standard set of seeds (42, 123, 777).")
             be_agt = gr.Dropdown(["Greedy", "Random", "RL (Q-Learning)"], value="Greedy", label="Agent")
-            be_btn = gr.Button("📈 Run Benchmark", variant="primary")
+            be_btn = gr.Button("Run Benchmark", variant="primary")
             be_log = gr.Textbox(label="Benchmark Results", lines=10)
             be_btn.click(_run_batch_eval, [be_agt], [gr.JSON(), be_log])
 
