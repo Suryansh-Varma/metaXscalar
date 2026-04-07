@@ -1,0 +1,30 @@
+easy:
+  total_steps: 30
+  tasks: 3
+  resources: 3
+  dynamic_arrivals: false
+  resource_failures: false
+  seed: 42
+
+medium:
+  total_steps: 45
+  tasks: 6
+  resources: 3
+  dynamic_arrivals: false
+  resource_failures: false
+  dependency_chains: true
+  seed: 42
+
+hard:
+  total_steps: 50
+  tasks_initial: 3
+  tasks_dynamic: 5
+  resources: 4
+  dynamic_arrivals: true
+  resource_failures: true
+  failure_rates:
+    cpu: 0.05
+    io: 0.03
+    memory: 0.02
+    network: 0.04
+  seed: 42

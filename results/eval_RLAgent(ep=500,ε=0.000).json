@@ -1,0 +1,264 @@
+{
+  "easy": {
+    "episodes": [
+      {
+        "difficulty": "easy",
+        "seed": 42,
+        "agent": "RLAgent(ep=500,\u03b5=0.000)",
+        "total_steps": 7,
+        "avg_step_reward": 0.4476638655462185,
+        "final_score": 0.75,
+        "completed_tasks": 3,
+        "failed_tasks": 0,
+        "total_tasks": 3,
+        "reward_breakdown": {
+          "completion": 1.0,
+          "priority": 1.0,
+          "efficiency": 0.0,
+          "timeliness": 1.0,
+          "overload": 0.0,
+          "conflict": 0.0,
+          "total": 0.75,
+          "details": {
+            "avg_util": 0.0,
+            "late_tasks": 0,
+            "overload_units": 0
+          }
+        }
+      },
+      {
+        "difficulty": "easy",
+        "seed": 123,
+        "agent": "RLAgent(ep=500,\u03b5=0.000)",
+        "total_steps": 7,
+        "avg_step_reward": 0.4476638655462185,
+        "final_score": 0.75,
+        "completed_tasks": 3,
+        "failed_tasks": 0,
+        "total_tasks": 3,
+        "reward_breakdown": {
+          "completion": 1.0,
+          "priority": 1.0,
+          "efficiency": 0.0,
+          "timeliness": 1.0,
+          "overload": 0.0,
+          "conflict": 0.0,
+          "total": 0.75,
+          "details": {
+            "avg_util": 0.0,
+            "late_tasks": 0,
+            "overload_units": 0
+          }
+        }
+      },
+      {
+        "difficulty": "easy",
+        "seed": 777,
+        "agent": "RLAgent(ep=500,\u03b5=0.000)",
+        "total_steps": 7,
+        "avg_step_reward": 0.4476638655462185,
+        "final_score": 0.75,
+        "completed_tasks": 3,
+        "failed_tasks": 0,
+        "total_tasks": 3,
+        "reward_breakdown": {
+          "completion": 1.0,
+          "priority": 1.0,
+          "efficiency": 0.0,
+          "timeliness": 1.0,
+          "overload": 0.0,
+          "conflict": 0.0,
+          "total": 0.75,
+          "details": {
+            "avg_util": 0.0,
+            "late_tasks": 0,
+            "overload_units": 0
+          }
+        }
+      }
+    ],
+    "n": 3,
+    "avg_final_score": 0.75,
+    "std_final_score": 0.0,
+    "min_score": 0.75,
+    "max_score": 0.75,
+    "avg_completion_rate": 1.0,
+    "avg_delay": 0.0,
+    "avg_utilization": 0.0
+  },
+  "medium": {
+    "episodes": [
+      {
+        "difficulty": "medium",
+        "seed": 42,
+        "agent": "RLAgent(ep=500,\u03b5=0.000)",
+        "total_steps": 45,
+        "avg_step_reward": 0.5634296296296296,
+        "final_score": 0.5690952380952381,
+        "completed_tasks": 5,
+        "failed_tasks": 1,
+        "total_tasks": 6,
+        "reward_breakdown": {
+          "completion": 0.8333,
+          "priority": 0.7857,
+          "efficiency": 0.0,
+          "timeliness": 0.54,
+          "overload": 0.0,
+          "conflict": 0.0,
+          "total": 0.5691,
+          "details": {
+            "avg_util": 0.0,
+            "late_tasks": 1,
+            "overload_units": 0
+          }
+        }
+      },
+      {
+        "difficulty": "medium",
+        "seed": 123,
+        "agent": "RLAgent(ep=500,\u03b5=0.000)",
+        "total_steps": 45,
+        "avg_step_reward": 0.5634296296296296,
+        "final_score": 0.5690952380952381,
+        "completed_tasks": 5,
+        "failed_tasks": 1,
+        "total_tasks": 6,
+        "reward_breakdown": {
+          "completion": 0.8333,
+          "priority": 0.7857,
+          "efficiency": 0.0,
+          "timeliness": 0.54,
+          "overload": 0.0,
+          "conflict": 0.0,
+          "total": 0.5691,
+          "details": {
+            "avg_util": 0.0,
+            "late_tasks": 1,
+            "overload_units": 0
+          }
+        }
+      },
+      {
+        "difficulty": "medium",
+        "seed": 777,
+        "agent": "RLAgent(ep=500,\u03b5=0.000)",
+        "total_steps": 45,
+        "avg_step_reward": 0.5634296296296296,
+        "final_score": 0.5690952380952381,
+        "completed_tasks": 5,
+        "failed_tasks": 1,
+        "total_tasks": 6,
+        "reward_breakdown": {
+          "completion": 0.8333,
+          "priority": 0.7857,
+          "efficiency": 0.0,
+          "timeliness": 0.54,
+          "overload": 0.0,
+          "conflict": 0.0,
+          "total": 0.5691,
+          "details": {
+            "avg_util": 0.0,
+            "late_tasks": 1,
+            "overload_units": 0
+          }
+        }
+      }
+    ],
+    "n": 3,
+    "avg_final_score": 0.5691,
+    "std_final_score": 0.0,
+    "min_score": 0.5691,
+    "max_score": 0.5691,
+    "avg_completion_rate": 0.8333,
+    "avg_delay": 0.0,
+    "avg_utilization": 0.0
+  },
+  "hard": {
+    "episodes": [
+      {
+        "difficulty": "hard",
+        "seed": 42,
+        "agent": "RLAgent(ep=500,\u03b5=0.000)",
+        "total_steps": 50,
+        "avg_step_reward": 0.37945092807537956,
+        "final_score": 0.3363702046035805,
+        "completed_tasks": 3,
+        "failed_tasks": 5,
+        "total_tasks": 8,
+        "reward_breakdown": {
+          "completion": 0.375,
+          "priority": 0.3913,
+          "efficiency": 0.7353,
+          "timeliness": 0.0,
+          "overload": 0.03,
+          "conflict": 0.0,
+          "total": 0.3364,
+          "details": {
+            "avg_util": 0.625,
+            "late_tasks": 5,
+            "overload_units": 1
+          }
+        }
+      },
+      {
+        "difficulty": "hard",
+        "seed": 123,
+        "agent": "RLAgent(ep=500,\u03b5=0.000)",
+        "total_steps": 50,
+        "avg_step_reward": 0.47274134199380735,
+        "final_score": 0.4367806905370844,
+        "completed_tasks": 5,
+        "failed_tasks": 3,
+        "total_tasks": 8,
+        "reward_breakdown": {
+          "completion": 0.625,
+          "priority": 0.6957,
+          "efficiency": 0.2941,
+          "timeliness": 0.0,
+          "overload": 0.0,
+          "conflict": 0.0,
+          "total": 0.4368,
+          "details": {
+            "avg_util": 0.25,
+            "late_tasks": 3,
+            "overload_units": 0
+          }
+        }
+      },
+      {
+        "difficulty": "hard",
+        "seed": 777,
+        "agent": "RLAgent(ep=500,\u03b5=0.000)",
+        "total_steps": 50,
+        "avg_step_reward": 0.4511852764537029,
+        "final_score": 0.4232308184143222,
+        "completed_tasks": 5,
+        "failed_tasks": 3,
+        "total_tasks": 8,
+        "reward_breakdown": {
+          "completion": 0.625,
+          "priority": 0.5652,
+          "efficiency": 0.4412,
+          "timeliness": 0.0,
+          "overload": 0.03,
+          "conflict": 0.0,
+          "total": 0.4232,
+          "details": {
+            "avg_util": 0.375,
+            "late_tasks": 3,
+            "overload_units": 1
+          }
+        }
+      }
+    ],
+    "n": 3,
+    "avg_final_score": 0.3988,
+    "std_final_score": 0.0545,
+    "min_score": 0.3364,
+    "max_score": 0.4368,
+    "avg_completion_rate": 0.5417,
+    "avg_delay": 0.0,
+    "avg_utilization": 0.0
+  },
+  "overall_avg": 0.5726
+}

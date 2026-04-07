@@ -1,0 +1,8 @@
+openai>=1.0.0
+gradio>=4.31.0
+pyyaml>=6.0
+pytest>=8.0
+numpy>=1.26.0
+python-dotenv
+fastapi
+uvicorn

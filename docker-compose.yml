@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+
+  # ── Gradio Dashboard ──────────────────────────────────────────────────────
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./results:/app/results   # persist RL weights and eval JSON files
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7860"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Offline RL Training job ────────────────────────────────────────────────
+  train-rl:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    command: python scripts/train_rl.py --episodes 300 --difficulty medium --verbose
+    volumes:
+      - ./results:/app/results
+    environment:
+      - PYTHONUNBUFFERED=1
+    profiles:
+      - train   # only runs with: docker compose --profile train up train-rl
+
+  # ── Batch Evaluation job ───────────────────────────────────────────────────
+  eval:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    command: python -c "
+      from agents import GreedyAgent, RLAgent;
+      from evaluation.evaluator import evaluate_all;
+      import os;
+      agent = RLAgent.load('results/rl_weights.json') if os.path.exists('results/rl_weights.json') else GreedyAgent();
+      evaluate_all(agent, verbose=True)"
+    volumes:
+      - ./results:/app/results
+    environment:
+      - PYTHONUNBUFFERED=1
+    profiles:
+      - eval

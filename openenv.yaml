@@ -1,0 +1,48 @@
+name: OpsArenaEnv
+version: "2.0.0"
+description: >
+  Benchmark environment for evaluating AI agents on multi-step operational
+  decision-making under resource constraints, priorities, deadlines, and dynamic conditions.
+
+observation_space:
+  type: dict
+  fields:
+    current_step:    {type: int,   description: Current episode step}
+    total_steps:     {type: int,   description: Episode length}
+    steps_remaining: {type: int,   description: Steps remaining}
+    pending_tasks:   {type: list,  description: Tasks awaiting assignment}
+    delayed_tasks:   {type: list,  description: Tasks with extended deadlines}
+    active_tasks:    {type: list,  description: Currently executing tasks}
+    completed_count: {type: int,   description: Completed task count}
+    failed_count:    {type: int,   description: Failed task count}
+    resources:       {type: list,  description: Resource status and utilisation}
+    system_load:     {type: float, description: Average resource utilisation [0,1]}
+    recent_events:   {type: list,  description: Last 6 system events}
+
+action_space:
+  type: structured_discrete
+  actions:
+    assign:       {params: [task_id, resource_id]}
+    reprioritize: {params: [task_id, new_priority]}
+    delay:        {params: [task_id, steps]}
+    noop:         {params: []}
+
+reward:
+  range: [0.0, 1.0]
+  type: dense
+  components:
+    completion:  {weight: 0.35}
+    priority:    {weight: 0.25}
+    efficiency:  {weight: 0.15}
+    timeliness:  {weight: 0.15}
+    overload:    {weight: 0.10}
+
+agents:
+  random:  {description: Random valid actions — performance floor}
+  greedy:  {description: Priority + EDF heuristic — non-LLM ceiling}
+  llm:     {description: Claude claude-opus-4-5 at temperature=0 — primary agent}
+
+difficulties:
+  easy:   {tasks: 3,  resources: 3, dynamic: false, failures: false}
+  medium: {tasks: 6,  resources: 3, dynamic: false, failures: false, dependencies: true}
+  hard:   {tasks: 8,  resources: 4, dynamic: true,  failures: true}
