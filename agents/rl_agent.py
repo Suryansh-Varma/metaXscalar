@@ -228,17 +228,20 @@ class RLAgent(BaseAgent):
         candidates = []
         pending = obs.get("pending_tasks", []) + obs.get("delayed_tasks", [])
         free_resources = [r for r in obs.get("resources", []) if r.get("available")]
+        completed_ids = set(obs.get("completed_task_ids", []))
 
         for task in pending:
             # Skip tasks with unmet dependencies
-            if task.get("dependencies"):
+            deps = task.get("dependencies", [])
+            if deps and not all(d in completed_ids for d in deps):
                 continue
             for res in free_resources:
                 if str(res.get("type", "")) == str(task.get("required_resource", "")):
                     feats = _task_features(task, obs)
                     candidates.append({
-                        "task_id": task["task_id"],
+                        "task_id":     task["task_id"],
                         "resource_id": res["resource_id"],
-                        "features": feats,
+                        "features":    feats,
                     })
         return candidates
+

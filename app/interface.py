@@ -147,7 +147,7 @@ def _run_full_episode(difficulty: str, agent_name: str, seed: int):
         rewards.append(r)
     
     final = env.final_score().to_dict()
-    comp = final['components']
+    comp = final
     
     # Generate Insightful Summary
     report = f"### System Health Report: {agent_name.upper()}\n"
@@ -155,11 +155,11 @@ def _run_full_episode(difficulty: str, agent_name: str, seed: int):
     report += "#### Actionable Insights:\n"
     report += f"- **SLA Compliance:** {comp['completion']*100:.1f}% of tasks safely deployed.\n"
     report += f"- **Resource Efficiency:** {comp['efficiency']*100:.1f}% utilization sweet-spot capture.\n"
-    report += f"- **Overload Risk:** {'High' if comp['overload'] < 0.5 else 'Low'} (Penalty: {1-comp['overload']:.2f})\n\n"
+    report += f"- **Overload Risk:** {'High' if comp['overload'] > 0.3 else 'Low'} (Penalty: {comp['overload']:.2f})\n\n"
     report += "#### Engineering Diagnosis:\n"
     if final['total'] > 0.8: report += "✅ High-performance scheduling with resilient buffer management."
     elif final['total'] > 0.5: report += "⚠️ Optimal for standard loads but susceptible to cascading failure on 'Hard' scenarios."
-    else: report += "❌ Critical bottleneck detected. Recommend retraining Resilience Model (RLM)."
+    else: report += f"❌ Efficiency bottleneck in '{difficulty}' environment. Suggests high resource contention."
     
     return _build_task_board_html(obs), _build_resource_meters_html(obs), report
 

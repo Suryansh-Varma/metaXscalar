@@ -1,7 +1,7 @@
 """
 Greedy agent — always assigns the highest-priority actionable task
-to the first compatible free resource. Breaks on dependency conflicts and
-resource contention; serves as the non-LLM performance ceiling.
+to the first compatible free resource. Uses dependency-awareness via
+completed_task_ids exposed in the observation.
 """
 
 from __future__ import annotations
@@ -10,13 +10,9 @@ from agents.base import BaseAgent
 
 class GreedyAgent(BaseAgent):
     def act(self, observation: dict) -> dict:
-        pending   = observation.get("pending_tasks", []) + observation.get("delayed_tasks", [])
-        resources = observation.get("resources", [])
-        completed = {
-            t["task_id"] for t in observation.get("active_tasks", [])
-            # We only have completed_count, not IDs, so we track through history elsewhere.
-            # Greedy skips tasks with pending dependencies.
-        }
+        pending      = observation.get("pending_tasks", []) + observation.get("delayed_tasks", [])
+        resources    = observation.get("resources", [])
+        completed_ids = set(observation.get("completed_task_ids", []))
 
         # Sort by priority descending, then by deadline ascending (EDF tiebreak)
         actionable = sorted(
@@ -27,9 +23,9 @@ class GreedyAgent(BaseAgent):
         free_resources = {r["resource_id"]: r for r in resources if r["available"]}
 
         for task in actionable:
-            # Skip tasks with unmet dependencies (we can't check completion from obs alone,
-            # so we skip any task that declares dependencies — conservative but safe)
-            if task.get("dependencies"):
+            # Skip tasks whose dependencies haven't finished yet
+            deps = task.get("dependencies", [])
+            if deps and not all(d in completed_ids for d in deps):
                 continue
             for rid, res in free_resources.items():
                 if res["type"] == task["required_resource"]:
