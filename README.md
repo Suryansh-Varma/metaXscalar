@@ -1,8 +1,8 @@
 ---
 title: OpsArena Cloud Ops Command Centre
-emoji: none
+emoji: ⚡
 colorFrom: indigo
-colorTo: slate
+colorTo: indigo
 sdk: docker
 pinned: false
 ---
