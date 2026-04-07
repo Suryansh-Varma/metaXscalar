@@ -76,11 +76,11 @@ def get_medium_scenario() -> dict:
 
 # Tasks that inject mid-episode; (arrival_step, Task)
 _HARD_ARRIVALS: list[tuple[int, Task]] = [
-    (5,  _task("t4", "Incident response",   Priority.CRITICAL, ResourceType.CPU,     5, 14, created_at=5)),
-    (8,  _task("t5", "Analytics pipeline",  Priority.MEDIUM,   ResourceType.IO,      7, 25, created_at=8)),
-    (10, _task("t6", "Audit log export",    Priority.HIGH,     ResourceType.IO,      5, 20, created_at=10, deps=["t2"])),
-    (12, _task("t7", "Capacity rebalance",  Priority.HIGH,     ResourceType.CPU,     4, 22, created_at=12)),
-    (15, _task("t8", "Emergency failover",  Priority.CRITICAL, ResourceType.NETWORK, 3, 20, created_at=15)),
+    (5,  _task("t4", "Incident response",   Priority.CRITICAL, ResourceType.CPU,     5, 18, created_at=5)),
+    (8,  _task("t5", "Analytics pipeline",  Priority.MEDIUM,   ResourceType.IO,      7, 30, created_at=8)),
+    (10, _task("t6", "Audit log export",    Priority.HIGH,     ResourceType.IO,      5, 28, created_at=10, deps=["t2"])),
+    (12, _task("t7", "Capacity rebalance",  Priority.HIGH,     ResourceType.CPU,     4, 28, created_at=12)),
+    (15, _task("t8", "Emergency failover",  Priority.CRITICAL, ResourceType.NETWORK, 3, 28, created_at=15)),
 ]
 
 
@@ -91,8 +91,8 @@ def get_hard_scenario() -> dict:
     Naive strategies collapse.
     """
     initial_tasks = {
-        "t1": _task("t1", "Security patch deploy", Priority.CRITICAL, ResourceType.CPU,    6, 12),
-        "t2": _task("t2", "Checkpoint backup",     Priority.MEDIUM,   ResourceType.IO,     8, 30),
+        "t1": _task("t1", "Security patch deploy", Priority.CRITICAL, ResourceType.CPU,    6, 20),
+        "t2": _task("t2", "Checkpoint backup",     Priority.MEDIUM,   ResourceType.IO,     8, 35),
         "t3": _task("t3", "Session cache init",    Priority.LOW,      ResourceType.MEMORY, 4, 40),
     }
     resources = {
