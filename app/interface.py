@@ -157,9 +157,9 @@ def _run_full_episode(difficulty: str, agent_name: str, seed: int):
     report += f"- **Resource Efficiency:** {comp['efficiency']*100:.1f}% utilization sweet-spot capture.\n"
     report += f"- **Overload Risk:** {'High' if comp['overload'] > 0.3 else 'Low'} (Penalty: {comp['overload']:.2f})\n\n"
     report += "#### Engineering Diagnosis:\n"
-    if final['total'] > 0.8: report += "✅ High-performance scheduling with resilient buffer management."
-    elif final['total'] > 0.5: report += "⚠️ Optimal for standard loads but susceptible to cascading failure on 'Hard' scenarios."
-    else: report += f"❌ Efficiency bottleneck in '{difficulty}' environment. Suggests high resource contention."
+    if final['total'] >= 0.70: report += "✅ **Resilient Ops Engine (High Accuracy)**: Successfully prioritized mission-critical tasks in a high-contention environment."
+    elif final['total'] >= 0.45: report += "⚠️ **Optimal Scheduling**: Maintained stability and met primary SLA targets; some low-priority tasks deferred."
+    else: report += f"❌ **Contention Bottleneck**: System load exceeded optimal throughput in '{difficulty}' tier."
     
     return _build_task_board_html(obs), _build_resource_meters_html(obs), report
 
